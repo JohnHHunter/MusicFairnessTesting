@@ -12,7 +12,10 @@ alpha_list = [4, 16, 64]
 reg_list = [.01, .1, 1, 10]
 factor_list = [64, 128]
 
+# store outcomes
 roc_auc_storage = np.empty((len(alpha_list), len(reg_list), len(factor_list)), (np.double, 2))
+out_file = open("als_hyperparameters.txt", "a+")
+out_file.write("alpha\treg\tfactors\trec_auc\tpop_auc")
 
 # train test split
 u_to_a_train, u_to_a_test, altered_users = mflib.make_train(a_u_matrix.T.tocsr(), pct_test=0.2)
@@ -34,3 +37,7 @@ for alpha_idx in range(len(alpha_list)):
                                              u_to_a_test)
 
             roc_auc_storage[alpha_idx][reg_idx][factor_idx] = rec_auc, pop_auc
+
+            out_file.write(str(alpha_idx) + "\t" + str(reg_idx) + "\t" + str(factor_idx) + "\t" + str(rec_auc) + "\t" + str(pop_auc) + "\n")
+
+out_file.close()
