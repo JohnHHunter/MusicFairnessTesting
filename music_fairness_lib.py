@@ -3,6 +3,7 @@ import scipy
 import random
 import numpy as np
 from sklearn import metrics
+import os.path
 
 def get_df_events():
     # initialize data
@@ -10,10 +11,10 @@ def get_df_events():
     # listened to less than the threshold number of times
     popular_artist_fraction = 0.2  # top cutoff for what we consider popular artists, in this case the top 20%
 
-    user_events_file = "../data/user_events.txt"
-    low_user_file = "../data/low_main_users.txt"
-    medium_user_file = "../data/medium_main_users.txt/"
-    high_user_file = "../data/high_main_users.txt"
+    user_events_file = os.path.join("/home/jimi/music_fairness/LFM-1b-surprise-and-implicit-analysis/ML_Base_Project/data/user_events.txt")
+    low_user_file = "/home/jimi/music_fairness/LFM-1b-surprise-and-implicit-analysis/ML_Base_Project/data/low_main_users.txt"
+    medium_user_file = "/home/jimi/music_fairness/LFM-1b-surprise-and-implicit-analysis/ML_Base_Project/data/medium_main_users.txt"
+    high_user_file = "/home/jimi/music_fairness/LFM-1b-surprise-and-implicit-analysis/ML_Base_Project/data/high_main_users.txt"
 
     # read in user events file
     cols = ['user', 'artist', 'album', 'track', 'timestamp']
@@ -62,7 +63,7 @@ def user_events_file_to_lil_matrix():
     artist_dict = {}
 
     # populate with user_events_file
-    with open("../data/user_events.txt", 'r') as fp:
+    with open("/home/jimi/music_fairness/LFM-1b-surprise-and-implicit-analysis/ML_Base_Project/data/user_events.txt", 'r') as fp:
         line = fp.readline()
         loop_count = 0
         while line:
